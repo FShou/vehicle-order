@@ -29,7 +29,7 @@ class VehicleResource extends Resource
             ->schema([
                 TextInput::make('name')->required(),
                 TextInput::make('licence_plate')
-                    ->unique()
+                    ->unique(ignoreRecord:true)
                     ->required()
                 ,
                 TextInput::make('distance_covered')
@@ -85,7 +85,7 @@ class VehicleResource extends Resource
                 ,
                 DateTimePicker::make('lease_expiration_date')
                 ,
-                DateTimePicker::make('lease_expiration_date')
+                DateTimePicker::make('last_maintenance_date')
                 ,
 
             ]);
