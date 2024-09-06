@@ -55,6 +55,15 @@ class OrderResource extends Resource
                 TextInput::make('purpose')
                     ->required()
                 ,
+                Select::make('status')
+                    ->options([
+                        'waiting' => 'Waiting',
+                        'rejected' => 'Rejected',
+                        'approved' => 'Approved',
+                        'done' => 'Done',
+                        'delivered' => 'delivered',
+                    ])
+                ,
                 DateTimePicker::make('start_date')
                     ->required()
                 ,
@@ -84,6 +93,14 @@ class OrderResource extends Resource
                 \EightyNine\Approvals\Tables\Columns\ApprovalStatusColumn::make("approvalStatus.status"),
                 TextColumn::make('status')
                     ->label('Order Status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'waiting' => 'gray',
+                        'approved' => 'success',
+                        'delivered' => 'warning',
+                        'done' => 'info',
+                        'rejected' => 'danger',
+                    })
                 ,
                 TextColumn::make('taken_date')
                     ->toggleable(isToggledHiddenByDefault:true)
