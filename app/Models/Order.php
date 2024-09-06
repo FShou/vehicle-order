@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use EightyNine\Approvals\Models\ApprovableModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Order extends Model
+class Order extends ApprovableModel
 {
     use HasFactory;
+    public bool $autoSubmit = true;
 
     public function employee(): BelongsTo {
         return $this->belongsTo(Employee::class);

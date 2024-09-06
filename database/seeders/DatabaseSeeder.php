@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,10 +21,28 @@ class DatabaseSeeder extends Seeder
         Employee::factory(10)->create();
         Driver::factory(10)->create();
 
-        User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@mail.com',
             'password' => '123'
         ]);
+
+        $chief = User::factory()->create([
+            'name' => 'Ketua Peminjaman',
+            'email' => 'ketua@mail.com',
+            'password' => '123'
+        ]);
+
+        $supervisor = User::factory()->create([
+            'name' => 'Supervisor',
+            'email' => 'supervisor@mail.com',
+            'password' => '123'
+        ]);
+
+        $admin->assignRole(Role::create(['name' => 'Admin']));
+        $chief->assignRole(Role::create(['name' => 'Chief']));
+        $supervisor->assignRole(Role::create(['name' => 'Supervisor']));
+
+
     }
 }
