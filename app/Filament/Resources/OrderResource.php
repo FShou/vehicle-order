@@ -19,6 +19,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class OrderResource extends Resource
 {
@@ -70,26 +73,44 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('id'),
+                TextColumn::make('id')
+                    ->searchable()
+                ,
                 TextColumn::make('employee.name'),
                 TextColumn::make('vehicle.name'),
                 TextColumn::make('driver.name'),
                 TextColumn::make('start_date'),
                 TextColumn::make('end_date'),
                 \EightyNine\Approvals\Tables\Columns\ApprovalStatusColumn::make("approvalStatus.status"),
-                // TextColumn::make('status')
+                TextColumn::make('status')
+                    ->label('Order Status')
+                ,
+                TextColumn::make('taken_date')
+                    ->toggleable(isToggledHiddenByDefault:true)
+                ,
+
+                TextColumn::make('return_date')
+                    ->toggleable(isToggledHiddenByDefault:true)
+                ,
             ])
             ->filters([
                 //
             ])
             ->actions(
                 ApprovalActions::make(
-
                     [
                         Tables\Actions\EditAction::make(),
                     ]
                 )
             )
+            ->headerActions([
+                ExportAction::make()->exports([
+                    ExcelExport::make()
+                            ->fromTable()
+                            ->askForFilename()
+                            ->askForWriterType()
+                ])
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
