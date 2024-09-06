@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Driver;
 use App\Models\Employee;
+use App\Models\Order;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use RingleSoft\LaravelProcessApproval\Enums\ApprovalTypeEnum;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -38,10 +40,19 @@ class DatabaseSeeder extends Seeder
             'email' => 'supervisor@mail.com',
             'password' => '123'
         ]);
+        $adminRole = Role::create(['name' => 'Admin']);
+        $chiefRole = Role::create(['name' => 'Chief']);
+        $supervisorRole = Role::create(['name' => 'Supervisor']);
 
-        $admin->assignRole(Role::create(['name' => 'Admin']));
-        $chief->assignRole(Role::create(['name' => 'Chief']));
-        $supervisor->assignRole(Role::create(['name' => 'Supervisor']));
+        $admin->assignRole($adminRole);
+        $chief->assignRole($chiefRole);
+        $supervisor->assignRole($supervisorRole);
+
+
+        Order::makeApprovable([
+            $supervisor->id => ApprovalTypeEnum::APPROVE->value,
+            $chiefRole->id => ApprovalTypeEnum::APPROVE->value,
+        ], 'OrderApproval');
 
 
     }

@@ -10,10 +10,12 @@ use EightyNine\Approvals\Tables\Actions\ApprovalActions;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -47,6 +49,9 @@ class OrderResource extends Resource
                     ->preload()
                     ->required()
                 ,
+                TextInput::make('purpose')
+                    ->required()
+                ,
                 DateTimePicker::make('start_date')
                     ->required()
                 ,
@@ -65,13 +70,21 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 //
+                TextColumn::make('id'),
+                TextColumn::make('employee.name'),
+                TextColumn::make('vehicle.name'),
+                TextColumn::make('driver.name'),
+                TextColumn::make('start_date'),
+                TextColumn::make('end_date'),
+                \EightyNine\Approvals\Tables\Columns\ApprovalStatusColumn::make("approvalStatus.status"),
+                // TextColumn::make('status')
             ])
             ->filters([
                 //
             ])
             ->actions(
                 ApprovalActions::make(
-                    Action::make('Done'),
+
                     [
                         Tables\Actions\EditAction::make(),
                     ]
