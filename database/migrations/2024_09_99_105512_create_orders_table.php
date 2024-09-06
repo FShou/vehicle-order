@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('driver_id')->constrained('drivers')->noActionOnDelete();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->dateTime('taken_date');
-            $table->dateTime('return_date');
+            $table->dateTime('taken_date')->nullable()->default(null);
+            $table->dateTime('return_date')->nullable()->default(null);
             $table->timestamps();
         });
     }
