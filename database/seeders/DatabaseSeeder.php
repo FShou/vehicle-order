@@ -6,6 +6,8 @@ use App\Models\Driver;
 use App\Models\Employee;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Vehicle;
+use App\Models\VehicleOwner;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use RingleSoft\LaravelProcessApproval\Enums\ApprovalTypeEnum;
@@ -22,6 +24,28 @@ class DatabaseSeeder extends Seeder
 
         Employee::factory(10)->create();
         Driver::factory(10)->create();
+
+        $owner1 = VehicleOwner::factory()->create([
+            'company_name' => 'Kantor Cabang',
+            'address' => 'Jakarta'
+        ]);
+        $owner2 = VehicleOwner::factory()->create([
+            'company_name' => 'Kantor Pusat',
+            'address' => 'Sumatra'
+        ]);
+
+        Vehicle::factory()->create([
+            'name' => 'Suzuki Mobil',
+            'vehicle_owner_id' => $owner1->id,
+        ]);
+
+
+        Vehicle::factory()->create([
+            'name' => 'Kawasaki',
+            'vehicle_owner_id' => $owner1->id,
+        ]);
+
+
 
         $admin = User::factory()->create([
             'name' => 'Test User',
