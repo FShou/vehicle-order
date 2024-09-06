@@ -6,11 +6,13 @@ use App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource\RelationManagers;
 use App\Models\Vehicle;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -26,8 +28,21 @@ class VehicleResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')->required(),
-                TextInput::make('plate')->required(),
-                TextInput::make('remaining_fuel_bar')->integer()->required(),
+                TextInput::make('licence_plate')
+                    ->unique()
+                    ->required()
+                ,
+                TextInput::make('distance_covered')
+                    ->integer()
+                    ->label("Distance Covered (Km)")
+                    ->required()
+                ,
+                TextInput::make('remaining_fuel_bar')
+                    ->integer()
+                    ->minValue(0)
+                    ->maxValue(4)
+                    ->required()
+                ,
                 Select::make('vehicle_owner_id')
                     ->relationship('vehicle_owner','company_name')
                     ->searchable()
@@ -37,8 +52,42 @@ class VehicleResource extends Resource
                         TextInput::make('address')
                     ])
                     ->required()
+                ,
+                Select::make('type')
+                    ->options([
+                        'passanger' => 'Passanger Vehicle',
+                        'cargo' => 'Cargo Vehicle'
+                    ])
+                    ->searchable()
+                    ->default('passanger')
+                    ->required()
+                ,
+                Select::make('fuel_type')
+                    ->options([
+                        'solar' => 'Solar',
+                        'pertalite' => 'Pertalite',
+                        'pertamax' => 'Pertamax'
+                    ])
+                    ->searchable()
+                    ->default('solar')
+                    ->required()
+                ,
+                Select::make('status')
+                    ->options([
+                        'need_maintenance' => 'Need Maintenance',
+                        'maintenance' => 'Under Maintenance',
+                        'in_use' => "In use",
+                        'available' => "Available"
+                    ])
+                    ->searchable()
+                    ->default('available')
+                    ->required()
+                ,
+                DateTimePicker::make('lease_expiration_date')
+                ,
+                DateTimePicker::make('lease_expiration_date')
+                ,
 
-                //
             ]);
     }
 
@@ -46,6 +95,31 @@ class VehicleResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('name')->searchable(),
+                TextColumn::make('licence_plate')->searchable(),
+                TextColumn::make('type')
+                    // ->enum([
+                    //     'passanger' => 'Passanger Vehicle',
+                    //     'cargo' => 'Cargo Vehicle'
+                    // ])
+                ,
+                TextColumn::make('fuel_type')
+                    // ->enum([
+                    //     'solar' => 'Solar',
+                    //     'pertalite' => 'Pertalite',
+                    //     'pertamax' => 'Pertamax'
+                    // ])
+                ,
+                TextColumn::make('remaining_fuel_bar'),
+                TextColumn::make('status')
+                    // ->formatState([
+                    //     'need_maintenance' => 'Need Maintenance',
+                    //     'maintenance' => 'Under Maintenance',
+                    //     'in_use' => "In use",
+                    //     'available' => "Available"
+                    // ])
+                ,
+
                 //
             ])
             ->filters([

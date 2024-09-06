@@ -14,14 +14,15 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('plate')->unique();
+            $table->string('licence_plate')->unique();
             $table->enum('type',['passanger','cargo']);
             $table->enum('fuel_type', ['solar','pertalite','pertamax']);
             $table->tinyInteger('remaining_fuel_bar');
+            $table->integer('distance_covered');
             $table->foreignId('vehicle_owner_id')->constrained('vehicle_owners')->cascadeOnDelete();
             $table->enum('status',['need_maintenance', 'maintenance', 'in_use','available']);
             $table->dateTime('lease_expiration_date')->nullable()->default(null);
-            $table->dateTime('last_maintenance')->nullable()->default(null);
+            $table->dateTime('last_maintenance_date')->nullable()->default(null);
             $table->timestamps();
         });
     }
