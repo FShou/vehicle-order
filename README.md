@@ -91,9 +91,9 @@ There are 3 default user
 9. You can also Export the Orders table to XLX,XLS,or CSV by clicking the Export button and this prompt will show ![image](https://github.com/user-attachments/assets/6f01e4ab-2786-4e44-802b-f16d3006e5be)
 
 
-
-
-
+### Edit approval flow
+1. Login as Admin and navigate to Approval Flows click on OrderApproval ![image](https://github.com/user-attachments/assets/174b50a0-4687-41ca-9bfc-743794c380b8)
+2. Add the step and adjust the order as needed ![image](https://github.com/user-attachments/assets/6bee479e-9510-4025-92ac-cdc6a6d56830)
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
