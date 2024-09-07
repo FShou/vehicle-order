@@ -15,6 +15,8 @@ This app developed with
 - Laravel: 11.22.0
 - Composer: 2.7.9
 - MariaDB/MySQL : 11.5.2
+- Php extentions :
+    - ![image](https://github.com/user-attachments/assets/66033073-9ca5-463e-ba7c-926d96989d20)
 ---
 ![image](https://github.com/user-attachments/assets/059b0fd5-ac49-4724-a7f5-33cb56c2f93e)
 ![image](https://github.com/user-attachments/assets/3982c6da-38b4-4cb2-8131-908b1631295b)
