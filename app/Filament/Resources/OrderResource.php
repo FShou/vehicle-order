@@ -5,17 +5,20 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+use App\Models\Vehicle;
 use DateTime;
 use EightyNine\Approvals\Tables\Actions\ApprovalActions;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -38,10 +41,15 @@ class OrderResource extends Resource
                     ->relationship('employee', 'name')
                     ->searchable()
                     ->preload()
+                    ->columnSpan(2)
                     ->required()
                 ,
                 Select::make('vehicle_id')
-                    ->relationship('vehicle', 'name')
+                    ->label("Vehicle")
+                    ->options(Vehicle::query()
+                        ->whereNotIn('status', ['in_use', 'maintenance'])
+                        ->pluck('name','id')
+                    )
                     ->searchable()
                     ->preload()
                     ->required()
@@ -52,7 +60,11 @@ class OrderResource extends Resource
                     ->preload()
                     ->required()
                 ,
-                TextInput::make('purpose')
+                TextArea::make('purpose')
+                    ->maxLength(255)
+                    ->columnSpan(2)
+                    ->rows(5)
+                    ->autosize()
                     ->required()
                 ,
                 Select::make('status')
@@ -61,18 +73,22 @@ class OrderResource extends Resource
                         'rejected' => 'Rejected',
                         'approved' => 'Approved',
                         'done' => 'Done',
-                        'delivered' => 'delivered',
+                        'delivered' => 'Delivered',
                     ])
+                    ->columnSpan(2)
+                    ->default('waiting')
                 ,
                 DateTimePicker::make('start_date')
                     ->required()
                 ,
                 DateTimePicker::make('end_date')
+                    ->afterOrEqual('start_date')
                     ->required()
                 ,
                 DateTimePicker::make('taken_date')
                 ,
                 DateTimePicker::make('return_date')
+                    ->afterOrEqual('start_date')
 
             ]);
     }
@@ -88,9 +104,14 @@ class OrderResource extends Resource
                 TextColumn::make('employee.name'),
                 TextColumn::make('vehicle.name'),
                 TextColumn::make('driver.name'),
-                TextColumn::make('start_date'),
-                TextColumn::make('end_date'),
-                \EightyNine\Approvals\Tables\Columns\ApprovalStatusColumn::make("approvalStatus.status"),
+                TextColumn::make('start_date')
+                    ->dateTime('d/m/Y, h:i A')
+                ,
+                TextColumn::make('end_date')
+                    ->dateTime('d/m/Y, h:i A')
+                ,
+                \EightyNine\Approvals\Tables\Columns\ApprovalStatusColumn::make("approvalStatus.status")
+                ,
                 TextColumn::make('status')
                     ->label('Order Status')
                     ->badge()
@@ -111,7 +132,14 @@ class OrderResource extends Resource
                 ,
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'waiting' => 'Waiting',
+                        'rejected' => 'Rejected',
+                        'approved' => 'Approved',
+                        'done' => 'Done',
+                        'delivered' => 'Delivered',
+                    ])
             ])
             ->actions(
                 ApprovalActions::make(
