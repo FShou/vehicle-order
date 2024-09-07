@@ -97,5 +97,7 @@ There are 3 default user
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
 
 ## Acknowledgements
-- [fogleman/ease](https://github.com/fogleman/ease) - Easing functions library used in this project.
-- [Hyprland](https://hyprland.org) 
+- [pxlrbt/filament-excel](https://github.com/pxlrbt/filament-excel)
+- [filament-approvals](https://github.com/eighty9nine/filament-approvals)
+- [Filament](https://github.com/filamentphp/filament)
+- [Laravel](https://github.com/laravel/laravel)
