@@ -5,14 +5,19 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource\RelationManagers;
 use App\Models\Vehicle;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -107,6 +112,11 @@ class VehicleResource extends Resource
                 TextColumn::make('remaining_fuel_bar'),
 
                 TextColumn::make('last_maintenance_date')
+                    ->dateTime('d/m/Y, h:i A')
+                ,
+                TextColumn::make('lease_expiration_date')
+                    ->dateTime('d/m/Y, h:i A')
+                    ->toggleable(isToggledHiddenByDefault:true)
                 ,
                 TextColumn::make('status')
                     ->badge()
@@ -121,7 +131,40 @@ class VehicleResource extends Resource
                 //
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'need_maintenance' => 'Need Maintenance',
+                        'maintenance' => 'Under Maintenance',
+                        'in_use' => "In use",
+                        'available' => "Available"
+                    ])
+                ,
+                SelectFilter::make('type')
+                    ->options([
+                        'passanger' => 'Passanger Vehicle',
+                        'cargo' => 'Cargo Vehicle'
+                    ])
+                ,
+                SelectFilter::make('fuel_type')
+                    ->options([
+                        'solar' => 'Solar',
+                        'pertalite' => 'Pertalite',
+                        'pertamax' => 'Pertamax'
+                    ])
+                ,
+                Filter::make('last_maintenance_date')
+                    ->form([
+                        Toggle::make('20-more')
+                        ->label("More than 20 days last maintenance")
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                    if ($data['20-more']) {
+                        $dateThreshold = Carbon::now()->subDays(20);
+
+                        // Apply the filter to the query
+                        $query->where('last_maintenance_date', '<=', $dateThreshold);
+                    }
+                })
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
