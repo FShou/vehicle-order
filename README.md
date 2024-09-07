@@ -30,28 +30,28 @@ This app developed with
     ```
 2. install requreid deps with `composer`
     ```sh
-    composer install
+        composer install
     ```
 3. rename .env.example to .env and configure Database env like following
     ```sh
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=vehicles_orders
-    DB_USERNAME=YOUR_DB_USERNAME
-    DB_PASSWORD=YOUR_DB_PASSWORD
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=vehicles_orders
+        DB_USERNAME=YOUR_DB_USERNAME
+        DB_PASSWORD=YOUR_DB_PASSWORD
     ```
 4. generate laravel key
     ```sh
-    php artisan key:generate
+        php artisan key:generate
     ```
-5. run the migration and seeder
+5. run the migration with seeder
     ```sh
-    php artisan migrate:freesh --seed
+        php artisan migrate --seed
     ```
 6. run the app
     ```sh
-    php artisan serve
+        php artisan serve
     ```
 ## Usage
 There are 3 default user
