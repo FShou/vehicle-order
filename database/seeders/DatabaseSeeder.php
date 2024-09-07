@@ -20,10 +20,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        Employee::factory(10)->create();
-        Driver::factory(10)->create();
+        $employess = Employee::factory(10)->create();
+        $drivers = Driver::factory(10)->create();
 
         $owner1 = VehicleOwner::factory()->create([
             'company_name' => 'Kantor Cabang',
@@ -34,16 +33,25 @@ class DatabaseSeeder extends Seeder
             'address' => 'Sumatra'
         ]);
 
-        Vehicle::factory()->create([
+        $vehicle1 = Vehicle::factory()->create([
             'name' => 'Suzuki Mobil',
             'vehicle_owner_id' => $owner1->id,
         ]);
 
 
-        Vehicle::factory()->create([
+        $vehicle2 = Vehicle::factory()->create([
             'name' => 'Kawasaki',
-            'vehicle_owner_id' => $owner1->id,
+            'vehicle_owner_id' => $owner2->id,
         ]);
+
+        // for($i = 0; $i<10 ; $i++){
+        //     Order::factory()->create([
+        //         'employee_id' => $employess[$i]->id,
+        //         'vehicle_id' => $i % 2 ? $vehicle1->id : $vehicle2 ,
+        //         'driver_id' => $drivers[$i]->id,
+        //     ]);
+        // }
+
 
 
 
@@ -64,6 +72,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'supervisor@mail.com',
             'password' => '123'
         ]);
+
         $adminRole = Role::create(['name' => 'Admin']);
         $chiefRole = Role::create(['name' => 'Chief']);
         $supervisorRole = Role::create(['name' => 'Supervisor']);
