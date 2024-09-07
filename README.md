@@ -32,7 +32,7 @@ This app developed with
     ```sh
     composer install
     ```
-4. rename .env.example to .env and configure Database env like following
+3. rename .env.example to .env and configure Database env like following
     ```sh
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -41,20 +41,18 @@ This app developed with
     DB_USERNAME=YOUR_DB_USERNAME
     DB_PASSWORD=YOUR_DB_PASSWORD
     ```
-5. generate laravel key
+4. generate laravel key
     ```sh
     php artisan key:generate
     ```
-7. run the migration and seeder
+5. run the migration and seeder
     ```sh
     php artisan migrate:freesh --seed
     ```
-9. run the app
+6. run the app
     ```sh
     php artisan serve
     ```
-
-
 ## Usage
 There are 3 default user
 - Admin 
@@ -84,6 +82,7 @@ There are 3 default user
      ```
 
    ### How to use
+  
   1. Go to localhost:8000 (depend on laravel output )
   2. Log in with Admin account first
   3. Go to Order and create new on the Order
