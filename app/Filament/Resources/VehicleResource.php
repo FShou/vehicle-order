@@ -20,8 +20,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class VehicleResource extends Resource
 {
     protected static ?string $model = Vehicle::class;
+    protected static ?string $navigationGroup = 'Vehicle';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
 
     public static function form(Form $form): Form
     {
@@ -98,26 +99,23 @@ class VehicleResource extends Resource
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('licence_plate')->searchable(),
                 TextColumn::make('type')
-                    // ->enum([
-                    //     'passanger' => 'Passanger Vehicle',
-                    //     'cargo' => 'Cargo Vehicle'
-                    // ])
+                    ->formatStateUsing(fn (string $state): string => ucwords($state) )
                 ,
                 TextColumn::make('fuel_type')
-                    // ->enum([
-                    //     'solar' => 'Solar',
-                    //     'pertalite' => 'Pertalite',
-                    //     'pertamax' => 'Pertamax'
-                    // ])
+                    ->formatStateUsing(fn (string $state): string => ucwords($state) )
                 ,
                 TextColumn::make('remaining_fuel_bar'),
+
+                TextColumn::make('last_maintenance_date')
+                ,
                 TextColumn::make('status')
-                    // ->formatState([
-                    //     'need_maintenance' => 'Need Maintenance',
-                    //     'maintenance' => 'Under Maintenance',
-                    //     'in_use' => "In use",
-                    //     'available' => "Available"
-                    // ])
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'need_maintenance' => 'danger' ,
+                        'maintenance' => 'warning',
+                        'in_use' => 'info',
+                        'available' => 'success'
+                    })
                 ,
 
                 //

@@ -97,7 +97,7 @@ class OrderResource extends Resource
                     ->color(fn (string $state): string => match ($state) {
                         'waiting' => 'gray',
                         'approved' => 'success',
-                        'delivered' => 'warning',
+                        'delivered' => 'purple',
                         'done' => 'info',
                         'rejected' => 'danger',
                     })

@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use EightyNine\Approvals\ApprovalPlugin;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -26,13 +27,17 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('')
             ->login()
+            ->favicon(asset('images/icon.png'))
+            ->sidebarCollapsibleOnDesktop(true)
             ->plugins([
                 ApprovalPlugin::make(),
             ])
+            ->defaultThemeMode(ThemeMode::Light)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Sky,
+                'purple' => Color::Violet
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
