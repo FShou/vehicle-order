@@ -99,6 +99,7 @@ class OrderResource extends Resource
             ->columns([
                 //
                 TextColumn::make('id')
+                    ->sortable()
                     ->searchable()
                 ,
                 TextColumn::make('employee.name'),
@@ -131,6 +132,7 @@ class OrderResource extends Resource
                     ->toggleable(isToggledHiddenByDefault:true)
                 ,
             ])
+            ->defaultSort('id','desc')
             ->filters([
                 SelectFilter::make('status')
                     ->options([
