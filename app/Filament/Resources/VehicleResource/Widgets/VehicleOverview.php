@@ -11,6 +11,10 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class VehicleOverview extends BaseWidget
 {
 
+    public static function canView(): bool
+    {
+        return auth()->user()->hasRole('Admin');
+    }
 
     protected function getStats(): array
     {
