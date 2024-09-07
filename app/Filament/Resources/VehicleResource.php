@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource\RelationManagers;
+use App\Filament\Resources\VehicleResource\Widgets\VehicleOverview;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Filament\Forms;
@@ -181,6 +182,13 @@ class VehicleResource extends Resource
     {
         return [
             //
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            VehicleOverview::class,
         ];
     }
 
