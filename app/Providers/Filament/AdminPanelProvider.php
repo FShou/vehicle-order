@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\OrderResource\Widgets\OrdersChart;
 use App\Filament\Resources\VehicleResource\Widgets\MoreThan20DayVehicle;
 use App\Filament\Resources\VehicleResource\Widgets\VehicleOverview;
 use EightyNine\Approvals\ApprovalPlugin;
@@ -49,6 +50,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 VehicleOverview::class,
+                OrdersChart::class,
                 MoreThan20DayVehicle::class
             ])
             ->middleware([
