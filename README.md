@@ -80,16 +80,14 @@ There are 3 default user
      password:
      123
      ```
-
-   ### How to use
-  
-  1. Go to localhost:8000 (depend on laravel output )
-  2. Log in with Admin account first
-  3. Go to Order and create new on the Order
-  4. Log Out
-  5. Login as supervisor to approve
-  6. Login as ketua to final approvement
-  7. You can also Export the Orders table to XLX,XLS,or CSV
+### How to use
+1. Go to localhost:8000 (depend on laravel output )
+2. Log in with Admin account first
+3. Go to Order and create new on the Order
+4. Log Out
+5. Login as supervisor to approve
+6. Login as ketua to final approvement
+7. You can also Export the Orders table to XLX,XLS,or CSV
 
 
 
