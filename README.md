@@ -81,13 +81,15 @@ There are 3 default user
      123
      ```
 ### How to use
-1. Go to localhost:8000 (depend on laravel output )
-2. Log in with Admin account first
-3. Go to Order and create new on the Order
-4. Log Out
-5. Login as supervisor to approve
-6. Login as ketua to final approvement
-7. You can also Export the Orders table to XLX,XLS,or CSV
+1. Go to localhost:8000 (depend on laravel output ) and it will be redirected to `/login` Log in as Admin first ![image](https://github.com/user-attachments/assets/93d3c461-a625-434b-8135-ddbfdb5988fb)
+2. Navigate to Order and click New Order to create order![image](https://github.com/user-attachments/assets/40c20f8c-b508-4faa-9c0b-2ac253ec6343)
+3. Fill out the form and click Create ![image](https://github.com/user-attachments/assets/48f530a3-f62e-45a2-9df0-15f2383ad4d9)
+5. Log Out ![image](https://github.com/user-attachments/assets/c92251fb-9823-4d85-8ccd-bf3d84ad34c6)
+6. Login as supervisor Navigate to order to approve ![image](https://github.com/user-attachments/assets/236606f7-a21b-4be8-a96b-f8477c1a0600)
+7. Once supervisor approved it will look like this ![image](https://github.com/user-attachments/assets/4f6368b1-a9c7-4904-a007-ccdf119da55f)
+8. Login as ketua to final approvement ![image](https://github.com/user-attachments/assets/6dabb73b-5f33-414f-ae8f-3909970c93dc)
+9. You can also Export the Orders table to XLX,XLS,or CSV by clicking the Export button and this prompt will show ![image](https://github.com/user-attachments/assets/6f01e4ab-2786-4e44-802b-f16d3006e5be)
+
 
 
 
