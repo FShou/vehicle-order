@@ -147,6 +147,7 @@ class OrderResource extends Resource
                 ApprovalActions::make(
                     [
                         Tables\Actions\EditAction::make(),
+                        Tables\Actions\ViewAction::make(),
                     ]
                 )
             )
@@ -178,6 +179,7 @@ class OrderResource extends Resource
             'index' => Pages\ListOrders::route('/'),
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
+            'view' => Pages\ViewOrder::route('/{record}')
         ];
     }
 }
