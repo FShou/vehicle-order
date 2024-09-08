@@ -87,10 +87,13 @@ There are 3 default user
 2. Navigate to Order and click New Order to create order![image](https://github.com/user-attachments/assets/40c20f8c-b508-4faa-9c0b-2ac253ec6343)
 3. Fill out the form and click Create ![image](https://github.com/user-attachments/assets/48f530a3-f62e-45a2-9df0-15f2383ad4d9)
 5. Log Out ![image](https://github.com/user-attachments/assets/c92251fb-9823-4d85-8ccd-bf3d84ad34c6)
-6. Login as supervisor Navigate to order to approve ![image](https://github.com/user-attachments/assets/236606f7-a21b-4be8-a96b-f8477c1a0600)
-7. Once supervisor approved it will look like this ![image](https://github.com/user-attachments/assets/4f6368b1-a9c7-4904-a007-ccdf119da55f)
-8. Login as ketua to final approvement ![image](https://github.com/user-attachments/assets/6dabb73b-5f33-414f-ae8f-3909970c93dc)
-9. You can also Export the Orders table to XLX,XLS,or CSV by clicking the Export button and this prompt will show ![image](https://github.com/user-attachments/assets/6f01e4ab-2786-4e44-802b-f16d3006e5be)
+6. Login as supervisor Navigate to order and approve here ![image](https://github.com/user-attachments/assets/236606f7-a21b-4be8-a96b-f8477c1a0600)
+7. or click the order to View in detail ![image](https://github.com/user-attachments/assets/75b5b18c-b209-424c-a489-89659e5d5f07)
+8. Once supervisor approved it will look like this ![image](https://github.com/user-attachments/assets/4f6368b1-a9c7-4904-a007-ccdf119da55f)
+9. Login as ketua to final approvement ![image](https://github.com/user-attachments/assets/6dabb73b-5f33-414f-ae8f-3909970c93dc)
+10. If one of the approvers rejected the whole proceess will be automaticly discarded and order will be rejected ![image](https://github.com/user-attachments/assets/1fba84a2-749c-447b-ae9c-ae8a296b4859)
+11. by clicking on Approval status the Approval History will shown ![image](https://github.com/user-attachments/assets/ba151ca9-a698-4e48-8b21-756b55b6367b)
+12. You can also Export the Orders table to XLX,XLS,or CSV by clicking the Export button and this prompt will show ![image](https://github.com/user-attachments/assets/6f01e4ab-2786-4e44-802b-f16d3006e5be)
 
 
 ### Edit approval flow
