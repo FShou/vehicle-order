@@ -34,6 +34,12 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->favicon(asset('images/icon.png'))
             ->sidebarCollapsibleOnDesktop(true)
+            ->navigationGroups([
+                'Vehicle',
+                'Data',
+                'Account',
+                'Configuration',
+            ])
             ->plugins([
                 ApprovalPlugin::make(),
             ])
