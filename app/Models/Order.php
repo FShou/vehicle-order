@@ -18,9 +18,9 @@ class Order extends ApprovableModel
 
     public function onApprovalCompleted(ProcessApproval $approval): bool
     {
-        $approvable = $approval->approvable;
-        $approvable->status = 'approved';
-        $approvable->save();
+        $order = $approval->approvable;
+        $order->save();
+        $order->status = 'approved';
 
        return true;
     }

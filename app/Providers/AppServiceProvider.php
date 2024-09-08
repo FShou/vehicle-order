@@ -2,14 +2,22 @@
 
 namespace App\Providers;
 
+use App\Listeners\OrderRejectedListener;
 use App\Policies\ProcessApprovalFlowPolicy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use RingleSoft\LaravelProcessApproval\Models\ProcessApprovalFlow;
-
+use RingleSoft\LaravelProcessApproval\Events\ProcessRejectedEvent;
 class AppServiceProvider extends ServiceProvider
 {
+
+    protected $listen = [
+        ProcessRejectedEvent::class => [
+            OrderRejectedListener::class
+        ]
+    ];
+
     /**
      * Register any application services.
      */
@@ -17,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
+
 
     /**
      * Bootstrap any application services.
